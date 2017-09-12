@@ -1,7 +1,9 @@
 export default {
-  entry: 'src/index.js',
-  format: 'cjs',
-  dest: 'dist/bundle.js',
+  input: 'src/index.js',
+  output: {
+    file: 'dist/bundle.js',
+    format: 'cjs',
+  },
   external: [
     'fs',
     'url',
