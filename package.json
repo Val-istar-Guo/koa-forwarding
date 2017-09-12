@@ -1,6 +1,6 @@
 {
   "name": "koa-forwarding",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "The koa middleware used to forwarding request",
   "main": "dist/bundle.js",
   "jsnext:main": "src/index",
