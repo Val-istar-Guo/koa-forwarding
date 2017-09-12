@@ -1,5 +1,4 @@
 import url from 'url';
-import path from 'path';
 import http from 'http';
 
 import request from './request';
@@ -7,17 +6,27 @@ import request from './request';
 
 const defaultMap = p => p;
 
+
+function fixPath(path) {
+  if (!path.match(/^\//)) {
+    return `/${path}`;
+  }
+
+  return path;
+}
+
 export default function ({ host, port = null, match = /.*/, map }) {
   return async (ctx, next) => {
-    if (!match(ctx.path)) {
+    if (!match.test(ctx.path)) {
       await next();
       return;
     }
 
+    const path = fixPath(map(ctx.path));
     const opt = {
       host,
       port,
-      path: map(ctx.path),
+      path,
       method: ctx.method,
       headers: Object.assign({}, ctx.header, { host }),
     };
